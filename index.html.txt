@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satyam Enterprises - Products</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background-color: #0A1F44;
+        color: #E0E0E0;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+    header {
+        background: linear-gradient(90deg, #0A1F44, #162A59);
+        color: #D4AF37;
+        text-align: center;
+        padding: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .dark-mode {
+        background-color: #f5f5f5;
+        color: #222;
+    }
+    .dark-mode header {
+        background: linear-gradient(90deg, #D4AF37, #f1c40f);
+        color: #0A1F44;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+        padding: 30px;
+    }
+    .card {
+        background-color: #162A59;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0px 6px 20px rgba(0,0,0,0.4);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        cursor: pointer;
+    }
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0px 10px 25px rgba(212, 175, 55, 0.5);
+    }
+    .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .card:hover img {
+        transform: scale(1.05);
+    }
+    .card-content {
+        padding: 15px;
+        text-align: center;
+    }
+    .card-content h3 {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #D4AF37;
+    }
+    .card-content p {
+        font-size: 14px;
+        color: #C0C0C0;
+    }
+    .price {
+        font-size: 16px;
+        color: #f1c40f;
+        font-weight: bold;
+        margin-top: 8px;
+    }
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #D4AF37;
+        color: #0A1F44;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+        transition: background 0.3s ease;
+    }
+    .toggle-btn:hover {
+        background: #f1c40f;
+    }
+</style>
+</head>
+<body>
+
+<header>Satyam Enterprises - Premium Machinery Products</header>
+<button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
+
+<div class="container">
+    <div class="card">
+        <img src="Ashcroft 1112 poras pressure snubber.jpg" alt="Pressure Snubber">
+        <div class="card-content">
+            <h3>Ashcroft 1112 Poras Pressure Snubber</h3>
+            <p>Durable snubber for industrial applications.</p>
+            <div class="price">₹5,500</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="ball valve.jpg" alt="Ball Valve">
+        <div class="card-content">
+            <h3>Ball Valve</h3>
+            <p>Precision-engineered for fluid control.</p>
+            <div class="price">₹2,800</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="block and lead valve.jpg" alt="Block & Lead Valve">
+        <div class="card-content">
+            <h3>Block & Lead Valve</h3>
+            <p>Reliable for pipeline systems.</p>
+            <div class="price">₹3,200</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="brass cable gland.jpg" alt="Brass Cable Gland">
+        <div class="card-content">
+            <h3>Brass Cable Gland</h3>
+            <p>High-quality cable protection.</p>
+            <div class="price">₹950</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="coplanar manifold.jpg" alt="Coplanar Manifold">
+        <div class="card-content">
+            <h3>Coplanar Manifold</h3>
+            <p>Efficient pressure control system.</p>
+            <div class="price">₹7,800</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="double ball check Grease fitting.jpg" alt="Grease Fitting">
+        <div class="card-content">
+            <h3>Double Ball Check Grease Fitting</h3>
+            <p>Durable lubrication solution.</p>
+            <div class="price">₹450</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="double block and bleed valve.jpg" alt="Bleed Valve">
+        <div class="card-content">
+            <h3>Double Block & Bleed Valve</h3>
+            <p>Ideal for isolating process systems.</p>
+            <div class="price">₹4,500</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="ermeto fitting .jpg" alt="Ermeto Fitting">
+        <div class="card-content">
+            <h3>Ermeto Fitting</h3>
+            <p>Reliable high-pressure connection.</p>
+            <div class="price">₹1,200</div>
+        </div>
+    </div>
+    <div class="card">
+        <img src="female connector.jpg" alt="Female Connector">
+        <div class="card-content">
+            <h3>Female Connector</h3>
+            <p>Perfect for seamless piping.</p>
+            <div class="price">₹800</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleMode() {
+    document.body.classList.toggle("dark-mode");
+}
+</script>
+
+</body>
+</html>
