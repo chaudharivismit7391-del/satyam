@@ -1,185 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Satyam Enterprises - Products</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Satyam Enterprises - Premium Products</title>
 <style>
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        margin: 0;
-        background-color: #0A1F44;
-        color: #E0E0E0;
-        transition: background 0.5s ease, color 0.5s ease;
-    }
-    header {
-        background: linear-gradient(90deg, #0A1F44, #162A59);
-        color: #D4AF37;
-        text-align: center;
-        padding: 20px;
-        font-size: 28px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    }
-    .dark-mode {
-        background-color: #f5f5f5;
-        color: #222;
-    }
-    .dark-mode header {
-        background: linear-gradient(90deg, #D4AF37, #f1c40f);
-        color: #0A1F44;
-    }
-    .container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
-        padding: 30px;
-    }
-    .card {
-        background-color: #162A59;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0px 6px 20px rgba(0,0,0,0.4);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        cursor: pointer;
-    }
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0px 10px 25px rgba(212, 175, 55, 0.5);
-    }
-    .card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.4s ease;
-    }
-    .card:hover img {
-        transform: scale(1.05);
-    }
-    .card-content {
-        padding: 15px;
-        text-align: center;
-    }
-    .card-content h3 {
-        font-size: 18px;
-        margin: 10px 0;
-        color: #D4AF37;
-    }
-    .card-content p {
-        font-size: 14px;
-        color: #C0C0C0;
-    }
-    .price {
-        font-size: 16px;
-        color: #f1c40f;
-        font-weight: bold;
-        margin-top: 8px;
-    }
-    .toggle-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #D4AF37;
-        color: #0A1F44;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 25px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
-        transition: background 0.3s ease;
-    }
-    .toggle-btn:hover {
-        background: #f1c40f;
-    }
+  /* Font */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  :root{
+    --brand:#66b2ff;
+    --accent:#ffd166;
+    --glass: rgba(255,255,255,0.08);
+    --text:#ffffff;
+    --shadow: 0 15px 35px rgba(0,0,0,0.35);
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    font-family:'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--text);
+    background: linear-gradient(-45deg,#0d1b2a,#13293d,#1b3a57,#274864);
+    background-size: 400% 400%;
+    animation: bgShift 18s ease infinite;
+    line-height:1.45;
+  }
+  @keyframes bgShift{
+    0% {background-position:0% 50%}
+    50% {background-position:100% 50%}
+    100% {background-position:0% 50%}
+  }
+
+  /* Header / Nav */
+  header{
+    position:sticky; top:0; z-index:1000;
+    backdrop-filter: blur(14px);
+    background: linear-gradient(90deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding:14px 20px;
+  }
+  .nav{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; gap:16px;
+  }
+  .brand{
+    font-weight:700; letter-spacing:.5px; font-size:1.25rem;
+  }
+  .nav-spacer{flex:1}
+  .search{
+    display:flex; align-items:center; gap:10px;
+    background:var(--glass); padding:8px 12px; border-radius:24px;
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .search input{
+    background:transparent; border:none; outline:none; color:var(--text);
+    width:260px; font-size:.95rem;
+  }
+  .toggle{
+    border:none; padding:10px 14px; border-radius:24px;
+    background:var(--accent); color:#111; font-weight:600; cursor:pointer;
+  }
+
+  /* Hero */
+  .hero{
+    max-width:1200px; margin:22px auto 10px; padding:0 20px;
+  }
+  .hero h1{
+    margin:0 0 6px; font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  }
+  .sub{
+    color:#d8e8ff; opacity:.85; margin:0 0 12px;
+  }
+
+  /* Sections */
+  .section{
+    max-width:1200px; margin:0 auto; padding:20px;
+  }
+
+  /* Product grid */
+  .grid{
+    display:grid; gap:20px;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  }
+  .card{
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px; padding:16px;
+    box-shadow: var(--shadow);
+    transform: translateY(14px); opacity:0;
+    transition: transform .45s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card.in{ transform:none; opacity:1; }
+  .card:hover{ box-shadow: 0 22px 45px rgba(0,0,0,0.45); border-color: rgba(255,255,255,0.25); }
+
+  .thumb{
+    width:100%; height:260px; border-radius:12px;
+    object-fit: cover; background:#0f1f33;
+    display:block; margin-bottom:12px;
+    transition: transform .5s ease;
+  }
+  .card:hover .thumb{ transform: scale(1.03); }
+
+  .title{ margin:.2rem 0 .35rem; font-size:1.02rem; font-weight:600; color:#eaf3ff;}
+  .desc{ margin:0 0 .6rem; color:#c9dcff; font-size:.92rem; }
+  .price{
+    display:inline-block; background:#10243a; color:#bfe1ff; border:1px solid rgba(255,255,255,0.12);
+    padding:6px 10px; border-radius:12px; font-weight:600;
+  }
+
+  /* About & Contact (glass panels) */
+  .panel{
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px; padding:24px;
+    box-shadow:var(--shadow);
+  }
+  .panel h2{ margin:.2rem 0 10px; }
+  .panel p{ color:#d7e8ff; }
+
+  /* Contact form */
+  .contact-form{
+    display:grid; gap:12px; grid-template-columns:1fr 1fr;
+  }
+  .contact-form input, .contact-form textarea{
+    grid-column: span 1;
+    background:rgba(0,0,0,0.35); color:var(--text);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:12px; padding:12px; outline:none;
+  }
+  .contact-form textarea{ grid-column:1 / -1; min-height:110px; resize:vertical; }
+  .contact-form button{
+    grid-column:1 / -1; justify-self:start;
+    border:none; padding:10px 16px; border-radius:12px;
+    background:var(--accent); color:#111; font-weight:700; cursor:pointer;
+  }
+
+  /* Dark mode (kept simple since base is dark) */
+  .light{
+    background: linear-gradient(180deg,#eef6ff,#f6fbff);
+    color:#111;
+  }
+  .light header{ background: rgba(255,255,255,0.7); }
+  .light .search{ background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.08)}
+  .light .card,
+  .light .panel{ background: rgba(255,255,255,0.85); border-color: rgba(0,0,0,0.08); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+  .light .desc{ color:#35506b }
+  .light .title{ color:#0d2a45 }
+  .light .price{ background:#eef6ff; color:#0d2a45; border-color:#c5e0ff }
+
+  footer{
+    max-width:1200px; margin:30px auto 40px; padding:0 20px; text-align:center; color:#cfe6ff;
+  }
 </style>
 </head>
 <body>
 
-<header>Satyam Enterprises - Premium Machinery Products</header>
-<button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
+<header>
+  <div class="nav">
+    <div class="brand">Satyam Enterprises</div>
+    <div class="nav-spacer"></div>
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="q" type="text" placeholder="Search products…" oninput="filterCards()"/>
+    </div>
+    <button class="toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+</header>
 
-<div class="container">
-    <div class="card">
-        <img src="Ashcroft 1112 poras pressure snubber.jpg" alt="Pressure Snubber">
-        <div class="card-content">
-            <h3>Ashcroft 1112 Poras Pressure Snubber</h3>
-            <p>Durable snubber for industrial applications.</p>
-            <div class="price">₹5,500</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="ball valve.jpg" alt="Ball Valve">
-        <div class="card-content">
-            <h3>Ball Valve</h3>
-            <p>Precision-engineered for fluid control.</p>
-            <div class="price">₹2,800</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="block and lead valve.jpg" alt="Block & Lead Valve">
-        <div class="card-content">
-            <h3>Block & Lead Valve</h3>
-            <p>Reliable for pipeline systems.</p>
-            <div class="price">₹3,200</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="brass cable gland.jpg" alt="Brass Cable Gland">
-        <div class="card-content">
-            <h3>Brass Cable Gland</h3>
-            <p>High-quality cable protection.</p>
-            <div class="price">₹950</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="coplanar manifold.jpg" alt="Coplanar Manifold">
-        <div class="card-content">
-            <h3>Coplanar Manifold</h3>
-            <p>Efficient pressure control system.</p>
-            <div class="price">₹7,800</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="double ball check Grease fitting.jpg" alt="Grease Fitting">
-        <div class="card-content">
-            <h3>Double Ball Check Grease Fitting</h3>
-            <p>Durable lubrication solution.</p>
-            <div class="price">₹450</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="double block and bleed valve.jpg" alt="Bleed Valve">
-        <div class="card-content">
-            <h3>Double Block & Bleed Valve</h3>
-            <p>Ideal for isolating process systems.</p>
-            <div class="price">₹4,500</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="ermeto fitting .jpg" alt="Ermeto Fitting">
-        <div class="card-content">
-            <h3>Ermeto Fitting</h3>
-            <p>Reliable high-pressure connection.</p>
-            <div class="price">₹1,200</div>
-        </div>
-    </div>
-    <div class="card">
-        <img src="female connector.jpg" alt="Female Connector">
-        <div class="card-content">
-            <h3>Female Connector</h3>
-            <p>Perfect for seamless piping.</p>
-            <div class="price">₹800</div>
-        </div>
-    </div>
-</div>
+<section class="hero">
+  <h1>Premium Industrial Components</h1>
+  <p class="sub">Precision valves, fittings & instrumentation built for reliability.</p>
+</section>
+
+<section id="products" class="section">
+  <div id="grid" class="grid">
+    <!-- 1 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Ashcroft+1112+Pressure+Snubber" alt="Ashcroft 1112 Poras Pressure Snubber">
+      <h3 class="title">Ashcroft 1112 Poras Pressure Snubber</h3>
+      <p class="desc">Protects gauges & transmitters from sudden pressure spikes for longer service life.</p>
+      <span class="price">₹1,200</span>
+    </article>
+    <!-- 2 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Ball+Valve" alt="Ball Valve">
+      <h3 class="title">Ball Valve</h3>
+      <p class="desc">Quarter-turn control with low torque and full-bore flow performance.</p>
+      <span class="price">₹850</span>
+    </article>
+    <!-- 3 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Block+%26+Bleed+Valve" alt="Block and Lead Valve">
+      <h3 class="title">Block & Bleed Valve</h3>
+      <p class="desc">Compact isolation and safe venting for instrumentation manifolds.</p>
+      <span class="price">₹1,500</span>
+    </article>
+    <!-- 4 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Brass+Cable+Gland" alt="Brass Cable Gland">
+      <h3 class="title">Brass Cable Gland</h3>
+      <p class="desc">Rugged cable termination with IP-rated strain relief.</p>
+      <span class="price">₹400</span>
+    </article>
+    <!-- 5 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Coplanar+Manifold" alt="Coplanar Manifold">
+      <h3 class="title">Coplanar Manifold</h3>
+      <p class="desc">Slim profile manifold ideal for differential pressure transmitters.</p>
+      <span class="price">₹2,800</span>
+    </article>
+    <!-- 6 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Double+Ball+Check+Grease+Fitting" alt="Double Ball Check Grease Fitting">
+      <h3 class="title">Double Ball Check Grease Fitting</h3>
+      <p class="desc">Dual check design retains lubricant under high pressure conditions.</p>
+      <span class="price">₹600</span>
+    </article>
+    <!-- 7 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Double+Block+%26+Bleed+Valve" alt="Double Block and Bleed Valve">
+      <h3 class="title">Double Block & Bleed Valve</h3>
+      <p class="desc">Positive isolation for safe maintenance in critical lines.</p>
+      <span class="price">₹3,200</span>
+    </article>
+    <!-- 8 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Ermeto+Fitting" alt="Ermeto Fitting">
+      <h3 class="title">Ermeto Fitting</h3>
+      <p class="desc">Reliable bite-type tube fitting for hydraulic systems.</p>
+      <span class="price">₹250</span>
+    </article>
+    <!-- 9 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Female+Connector" alt="Female Connector">
+      <h3 class="title">Female Connector</h3>
+      <p class="desc">Precision connector ensuring leak-tight sealing and alignment.</p>
+      <span class="price">₹300</span>
+    </article>
+    <!-- 10 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Forged+Steel+Globe+Valve" alt="Forged Steel Globe Valve">
+      <h3 class="title">Forged Steel Globe Valve</h3>
+      <p class="desc">Throttling control for high pressure & temperature services.</p>
+      <span class="price">₹2,000</span>
+    </article>
+    <!-- 11 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=HEICO-TEC+Reaction+Nut" alt="HEICO-TEC Reaction Nut">
+      <h3 class="title">HEICO-TEC Reaction Nut</h3>
+      <p class="desc">Multi-jackbolt tensioner for precise clamping without heavy tools.</p>
+      <span class="price">₹900</span>
+    </article>
+    <!-- 12 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=High+Pressure+Ball+Valve" alt="High Pressure Ball Valve">
+      <h3 class="title">High Pressure Ball Valve</h3>
+      <p class="desc">Designed for extreme pressures with bubble-tight shutoff.</p>
+      <span class="price">₹4,200</span>
+    </article>
+    <!-- 13 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Sealant+Injection+Grease+Fitting" alt="High pressure sealant injection grease fitting">
+      <h3 class="title">High Pressure Sealant Injection Grease Fitting</h3>
+      <p class="desc">Injects sealing compound into operating valves safely.</p>
+      <span class="price">₹1,100</span>
+    </article>
+    <!-- 14 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Sealant+Injection+Fitting" alt="High pressure sealant injection fitting">
+      <h3 class="title">High Pressure Sealant Injection Fitting</h3>
+      <p class="desc">Specialized port for emergency valve sealing operations.</p>
+      <span class="price">₹1,250</span>
+    </article>
+    <!-- 15 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Condensate+Pot" alt="Lock Condensate Pot">
+      <h3 class="title">Lock Condensate Pot</h3>
+      <p class="desc">Traps condensate to protect DP transmitters from hot process media.</p>
+      <span class="price">₹2,200</span>
+    </article>
+    <!-- 16 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Male+Connector+Double+Ferrules" alt="Male connector with double ferrules">
+      <h3 class="title">Male Connector (Double Ferrules)</h3>
+      <p class="desc">Two-ferrule design for repeatable, leak-free tube connections.</p>
+      <span class="price">₹350</span>
+    </article>
+    <!-- 17 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Needle+Valve" alt="Needle Valve">
+      <h3 class="title">Needle Valve</h3>
+      <p class="desc">Fine flow control with robust stem & seat geometry.</p>
+      <span class="price">₹600</span>
+    </article>
+    <!-- 18 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Non-Return+Valve" alt="Non Return Valve">
+      <h3 class="title">Non Return Valve</h3>
+      <p class="desc">Prevents reverse flow to protect upstream equipment.</p>
+      <span class="price">₹750</span>
+    </article>
+    <!-- 19 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Orbital+Weld+Elbow" alt="Orbital weld elbow">
+      <h3 class="title">Orbital Weld Elbow</h3>
+      <p class="desc">High-purity elbows compatible with orbital welding systems.</p>
+      <span class="price">₹450</span>
+    </article>
+    <!-- 20 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Pressure+Gauge+Snubber" alt="Pressure gauge snubber">
+      <h3 class="title">Pressure Gauge Snubber</h3>
+      <p class="desc">Damps pulsation and vibration to stabilize gauge readings.</p>
+      <span class="price">₹500</span>
+    </article>
+    <!-- 21 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Pressure+Relief+Valve" alt="Pressure relief valve">
+      <h3 class="title">Pressure Relief Valve</h3>
+      <p class="desc">Opens at set pressure to protect systems from over-pressure.</p>
+      <span class="price">₹1,400</span>
+    </article>
+    <!-- 22 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Male+Branch+T+Fitting" alt="Stainless steel male branch T-fitting">
+      <h3 class="title">SS Male Branch T-Fitting</h3>
+      <p class="desc">Corrosion-resistant T for robust tube/pipe branching.</p>
+      <span class="price">₹380</span>
+    </article>
+    <!-- 23 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=SS+Pipe+Fitting" alt="Stainless steel pipe fitting">
+      <h3 class="title">Stainless Steel Pipe Fitting</h3>
+      <p class="desc">Machined to tight tolerances for industrial pipelines.</p>
+      <span class="price">₹500</span>
+    </article>
+    <!-- 24 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Threaded+to+Hose+Barb" alt="Stainless steel threaded to hose barb fitting">
+      <h3 class="title">SS Threaded to Hose Barb</h3>
+      <p class="desc">Quick conversion from threaded ports to flexible hose.</p>
+      <span class="price">₹450</span>
+    </article>
+    <!-- 25 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=SS+Tube+Fitting" alt="Stainless steel tube fitting">
+      <h3 class="title">Stainless Steel Tube Fitting</h3>
+      <p class="desc">High-pressure tube coupling with leak-tight integrity.</p>
+      <span class="price">₹480</span>
+    </article>
+    <!-- 26 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Union+Cross+Fitting" alt="Stainless steel union cross fitting">
+      <h3 class="title">Stainless Steel Union Cross</h3>
+      <p class="desc">Four-way union for compact multi-branch connections.</p>
+      <span class="price">₹520</span>
+    </article>
+    <!-- 27 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Syphon" alt="Syphon">
+      <h3 class="title">Syphon</h3>
+      <p class="desc">Protects pressure instruments from high-temperature media.</p>
+      <span class="price">₹300</span>
+    </article>
+    <!-- 28 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Turbo+Molecular+Vacuum+Pump" alt="Turbo molecular vacuum pump">
+      <h3 class="title">Turbo Molecular Vacuum Pump</h3>
+      <p class="desc">High-speed rotor stages deliver ultra-high vacuum performance.</p>
+      <span class="price">₹25,000</span>
+    </article>
+    <!-- 29 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Nitrogen+Pressure+Regulator" alt="Two straight nitrogen gas pressure regulator">
+      <h3 class="title">Two Straight Nitrogen Gas Pressure Regulator</h3>
+      <p class="desc">Accurate outlet control for nitrogen service; twin-stage stability.</p>
+      <span class="price">₹2,000</span>
+    </article>
+    <!-- 30 -->
+    <article class="card">
+      <img class="thumb" src="https://via.placeholder.com/800x600?text=Weldolet" alt="Weldolet">
+      <h3 class="title">Weldolet</h3>
+      <p class="desc">Reinforced branch connection with smooth stress distribution.</p>
+      <span class="price">₹650</span>
+    </article>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="panel">
+    <h2>About Us</h2>
+    <p>
+      Satyam Enterprises supplies premium industrial valves, fittings, manifolds and instrumentation accessories.
+      Our focus is reliability, safety and lifecycle value. With rigorous QA and responsive service, we help plants
+      operate with confidence—across oil & gas, chemicals, power, pharma and more.
+    </p>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="panel">
+    <h2>Contact Us</h2>
+    <p>Questions, quotations or bulk orders? We’re here to help.</p>
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks! We will get back to you shortly.');">
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <input type="tel" placeholder="Phone (optional)"/>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2025 Satyam Enterprises — All rights reserved.
+</footer>
 
 <script>
-function toggleMode() {
-    document.body.classList.toggle("dark-mode");
-}
+  // Theme toggle (dark base ↔ light)
+  function toggleTheme(){
+    document.body.classList.toggle('light');
+  }
+
+  // Search filter
+  function filterCards(){
+    const q = document.getElementById('q').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('#grid .card');
+    cards.forEach(card=>{
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+  }
+
+  // Scroll-in animation
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.14});
+  document.querySelectorAll('.card').forEach(el=>io.observe(el));
 </script>
 
 </body>
